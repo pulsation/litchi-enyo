@@ -3,23 +3,7 @@ var litchi = litchi || {};
 litchi._loanListInstance = null;
 litchi.loanList = function () {
     // example set.
-    var _all = [
-            {
-                contact: { name: "John", surname: "Door"},
-                item: {name: "Buggy"},
-                dueOn: '2012-05-09T13:44:29.203Z',
-                borrowedOn: '2012-04-13T13:44:29.203Z',
-                borrowedFromTo: 'from'
-            },
-            {
-                contact: {name: "Marie-Hélène", surname: "Delatour"},
-                item: {name: "U-Turn DVD"},
-                dueOn: '2012-12-12T13:44:29.203Z',
-                borrowedOn: '2012-03-03T13:44:29.203Z',
-                borrowedFromTo: 'to'
-            }
-        ],
-
+    var _all = litchi.sampleList,
         _currentList    = _all,
 
         /**
