@@ -1,23 +1,26 @@
+// kavimo: karimasu view model
 var kavimo = kavimo || {};
 
-kavimo.loans = function () {
-    // Model.
+kavimo.loanList = (function () {
+    // example set.
     var _all = [
-        {
-            contact: { name: "John", surname: "Door"},
-            item: {name: "Buggy"},
-            dueOn: '2012-05-09T13:44:29.203Z',
-            borrowedOn: '2012-04-13T13:44:29.203Z',
-            borrowedFromTo: 'from'
-        },
-        {
-            contact: {name: "Marie-Hélène", surname: "Delatour"},
-            item: {name: "U-Turn DVD"},
-            dueOn: '2012-12-12T13:44:29.203Z',
-            borrowedOn: '2012-03-03T13:44:29.203Z',
-            borrowedFromTo: 'to'
-        }
-    ],
+            {
+                contact: { name: "John", surname: "Door"},
+                item: {name: "Buggy"},
+                dueOn: '2012-05-09T13:44:29.203Z',
+                borrowedOn: '2012-04-13T13:44:29.203Z',
+                borrowedFromTo: 'from'
+            },
+            {
+                contact: {name: "Marie-Hélène", surname: "Delatour"},
+                item: {name: "U-Turn DVD"},
+                dueOn: '2012-12-12T13:44:29.203Z',
+                borrowedOn: '2012-03-03T13:44:29.203Z',
+                borrowedFromTo: 'to'
+            }
+        ],
+
+        _currentList    = _all,
 
         /**
          * Return loans for items I borrowed from or to someone.
@@ -59,31 +62,11 @@ kavimo.loans = function () {
     // Return loans for items I borrowed to someone.
     this.getBorrowedTo = function () { return _getBorrowedFromTo("To"); };
 
-    // Initialize the current loan
-    // this.setCurrentLoan(this.getAll()[0]);
-}();
-
-// LoanList MVVM
-Karimasu.loanList = new function () {
-
-    // Current list of loans
-    var _loans          = null,
-        _currentList    = null;
-
-    this.setLoans = function (loans) {
-        _loans = loans;
-        _currentList = loans.getAll();
-    };
-
     this.getList = function () {
         return _currentList;
-    }
+    };
 
     this.getLength = function () {
         return _currentList.length;
-    }
-}();
-
-// console.log(Karimasu.loanList);
-
-// Karimasu.loanList.setLoans(Karimasu.loansModel);
+    };
+}());
