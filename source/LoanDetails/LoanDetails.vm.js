@@ -1,6 +1,6 @@
-var kavimo = kavimo || {};
+var litchi = litchi || {};
 
-kavimo.loanDetail = function () {
+litchi.loanDetail = function () {
     // current loan
     var _currentLoan = null;
 

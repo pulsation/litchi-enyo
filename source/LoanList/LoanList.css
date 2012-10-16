@@ -1,0 +1,17 @@
+.loan-list-layout {
+	background-color: #eeeeee;
+	border-right: 1px #cccccc solid;
+}
+
+.loan-list-toolbar-dropdown-button {
+    width: 90%; 
+}
+
+.loan-list-item-name  {
+	padding: 8px;
+}
+
+.loan-list-item {
+    padding: 2px;    border-top:1px white solid;
+    border-bottom:1px lightgray solid;
+}

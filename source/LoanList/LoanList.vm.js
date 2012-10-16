@@ -1,7 +1,7 @@
-// kavimo: karimasu view model
-var kavimo = kavimo || {};
+var litchi = litchi || {};
 
-kavimo.loanList = (function () {
+litchi._loanListInstance = null;
+litchi.loanList = function () {
     // example set.
     var _all = [
             {
@@ -69,4 +69,5 @@ kavimo.loanList = (function () {
     this.getLength = function () {
         return _currentList.length;
     };
-}());
+    return this;
+}
