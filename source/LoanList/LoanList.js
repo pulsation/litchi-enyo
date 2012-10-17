@@ -9,6 +9,42 @@ enyo.kind({
     unmoveable: true
 });
 
+enyo.kind({
+    name: "LoanListFilter",
+    kind: "onyx.PickerDecorator",
+    handlers: {
+		onSelect: "filterSelected"
+	},
+    filterSelected: function (inSender, inEvent) {
+        litchi.loans.filterList(inEvent.selected.filterName);
+    },
+    components: [
+        {classes: "loan-list-filter"},
+        {
+            kind: "onyx.Picker",
+            components: [
+                {
+                    content: "Due",
+                    filterName: "Due"
+                },
+                {
+                    content: "Borrowed from",
+                    filterName: "BorrowedFrom"
+                },
+                {
+                    content: "Borrowed to",
+                    filterName: "BorrowedTo"
+                },
+                {
+                    content: "All",
+                    filterName: "All",
+                    active: true
+                }
+            ]
+        }
+    ]
+});
+
 /**
  * Header toolbar.
  */
@@ -17,41 +53,7 @@ enyo.kind({
     kind: "onyx.MoreToolbar",
     fit: false,
 	classes: "loans-toolbar",
-    components: [
-        { content: "All", unmoveable: true, style: "font-size: 20px;" },
-        {
-            filterName: "Due",
-            kind: "onyx.Button",
-            content: "Due",
-            classes: "loan-list-toolbar-dropdown-button",
-            ontap: "filterTaped"
-        },
-        {
-            filterName: "BorrowedFrom",
-            kind: "onyx.Button",
-            content: "Borrowed from",
-            classes: "loan-list-toolbar-dropdown-button",
-            ontap: "filterTaped"
-        },
-        {
-            filterName: "BorrowedTo",
-            kind: "onyx.Button",
-            content: "Borrowed to",
-            classes: "loan-list-toolbar-dropdown-button",
-            ontap: "filterTaped"
-        },
-        {
-            filterName: "All",
-            kind: "onyx.Button",
-            content: "All",
-            classes: "loan-list-toolbar-dropdown-button",
-            ontap: "filterTaped"
-        }
-    ],
-    filterTaped: function (inSender, inEvent) {
-        litchi.loans.filterList(inSender.filterName);
-
-    }
+    components: [{kind: "LoanListFilter"}]
 });
 
 /**

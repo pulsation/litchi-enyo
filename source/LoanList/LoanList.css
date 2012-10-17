@@ -3,12 +3,12 @@
 	border-right: 1px #cccccc solid;
 }
 
-.loan-list-toolbar-dropdown-button {
-    width: 90%; 
-}
-
 .loan-list-item-name  {
 	padding: 8px;
+}
+
+.loan-list-filter {
+    width: 150px;
 }
 
 .loan-list-item {
