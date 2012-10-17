@@ -15,3 +15,7 @@
     padding: 2px;    border-top:1px white solid;
     border-bottom:1px lightgray solid;
 }
+
+.loan-list-add {
+    float: right;
+}

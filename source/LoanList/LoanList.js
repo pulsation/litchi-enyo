@@ -6,7 +6,8 @@ enyo.kind({
 	kind: "onyx.Button",
 	content: "Add",
 	ontap: "addTaped",
-    unmoveable: true
+    unmoveable: true,
+    classes: "loan-list-add"
 });
 
 enyo.kind({
@@ -53,7 +54,7 @@ enyo.kind({
     kind: "onyx.MoreToolbar",
     fit: false,
 	classes: "loans-toolbar",
-    components: [{kind: "LoanListFilter"}]
+    components: [{content: "Litchi"}]
 });
 
 /**
@@ -65,7 +66,8 @@ enyo.kind({
     fit: false,
 	classes: "loans-toolbar",
     components: [
-        {kind: "LoanListToolbarAdd"}
+        {kind: "LoanListToolbarAdd"},
+        {kind: "LoanListFilter"}
     ]
 });
 
