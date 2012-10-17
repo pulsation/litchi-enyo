@@ -5,7 +5,7 @@ enyo.kind({
 	name: "LoanListToolbarAdd",
 	kind: "onyx.Button",
 	content: "Add",
-	ontap: "addTapped",
+	ontap: "addTaped",
     unmoveable: true
 });
 
@@ -20,27 +20,38 @@ enyo.kind({
     components: [
         { content: "All", unmoveable: true, style: "font-size: 20px;" },
         {
+            filterName: "Due",
             kind: "onyx.Button",
             content: "Due",
-            classes: "loan-list-toolbar-dropdown-button"
+            classes: "loan-list-toolbar-dropdown-button",
+            ontap: "filterTaped"
         },
         {
+            filterName: "BorrowedFrom",
             kind: "onyx.Button",
             content: "Borrowed from",
-            classes: "loan-list-toolbar-dropdown-button"
+            classes: "loan-list-toolbar-dropdown-button",
+            ontap: "filterTaped"
         },
         {
+            filterName: "BorrowedTo",
             kind: "onyx.Button",
             content: "Borrowed to",
-            classes: "loan-list-toolbar-dropdown-button"
+            classes: "loan-list-toolbar-dropdown-button",
+            ontap: "filterTaped"
         },
         {
+            filterName: "All",
             kind: "onyx.Button",
             content: "All",
-            classes: "loan-list-toolbar-dropdown-button"
+            classes: "loan-list-toolbar-dropdown-button",
+            ontap: "filterTaped"
         }
+    ],
+    filterTaped: function (inSender, inEvent) {
+        litchi.loans.filterList(inSender.filterName);
 
-    ]
+    }
 });
 
 /**
@@ -63,7 +74,7 @@ enyo.kind({
     name: "LoanListItem",
     classes: "loan-list-item",
     components: [{name: "name", classes: "loan-list-item-name"}],
-    ontap: "loanTapped"
+    ontap: "loanTaped"
 });
 
 /**
@@ -76,7 +87,7 @@ enyo.kind({
     touch: true,
     onSetupItem: "loanListSetupItem",
     components: [{kind: "LoanListItem"}],
-    loanTapped: function (inSender, inEvent) {
+    loanTaped: function (inSender, inEvent) {
         // TODO: switch to the "details" view
     }
 });
@@ -100,7 +111,7 @@ enyo.kind({
     },
     create: function () {
         this.inherited(arguments);
-        this.loans = new litchi.loanList();
+        this.loans = litchi.loans;
         this.$.loanList.setCount(this.loans.getLength());
     }
 });
