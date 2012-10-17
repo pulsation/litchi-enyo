@@ -29,7 +29,7 @@ enyo.kind({
 enyo.kind({
     name: "LoanDetailsFooterToolbar",
     kind: onyx.Toolbar,
-	classes: "details-toolbar",
+	classes: "details-toolbar, loan-toolbar",
     components: [
         {kind: "onyx.Grabber", ontap: "detailsGrabberTapped" },
         {kind: "LoanDetailsToolbarEdit"},

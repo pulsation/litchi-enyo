@@ -7,3 +7,13 @@
 	border-radius: 4px;
 	background-color: silver;
 }
+
+.loan-toolbar {
+    height: 56px;
+}
+
+.loan-details-layout, .loan-list-layout {
+	background-color: #eeeeee; 
+    border-left: 1px solid #aaaaaa;
+}
+

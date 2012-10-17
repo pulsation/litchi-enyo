@@ -64,9 +64,9 @@ enyo.kind({
     name: "LoanListFooterToolbar",
     kind: "onyx.Toolbar",
     fit: false,
-	classes: "loans-toolbar",
+	classes: "loan-toolbar",
     components: [
-        {kind: "LoanListToolbarAdd"},
+        //{kind: "LoanListToolbarAdd"},
         {kind: "LoanListFilter"}
     ]
 });
@@ -99,9 +99,11 @@ enyo.kind({
         this.refresh();
     },
     loanTaped: function (inSender, inEvent) {
-        console.log("TODO: switch to the 'details' view");
         var appPanels = this.container.container;
-        appPanels.next();
+        if (window.innerWidth < 800) {
+            appPanels.next();
+        }
+        console.log("TODO: Show loan detail");
     }
 });
 
