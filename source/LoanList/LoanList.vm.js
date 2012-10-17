@@ -49,7 +49,7 @@ litchi.loans = (function() {
         },
         // Return loans for items I borrowed to someone.
         getBorrowedTo: function () {
-            return _getBorrowedFromTo("To");
+            return _getBorrowedFromTo("to");
         },
 
         getList: function () {
@@ -61,9 +61,12 @@ litchi.loans = (function() {
         },
 
         filterList: function (filterName) {
-            var getterName = "get" + filterName;
+            _currentList = this["get" + filterName]();
+            this.publishMessage("onLoansUpdated");
+        },
 
-            this._currentList = this[getterName]();
+        publishMessage: function (message) {
+            enyo.Signals.send("onLoansUpdated");
         }
     };
 }());

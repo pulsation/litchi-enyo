@@ -86,9 +86,16 @@ enyo.kind({
     fit: true,
     touch: true,
     onSetupItem: "loanListSetupItem",
-    components: [{kind: "LoanListItem"}],
+    components: [
+        {kind: "LoanListItem"},
+        {kind: "Signals", onLoansUpdated: "updateList"}
+    ],
+    updateList: function (inSender, inEvent) {
+        this.setCount(litchi.loans.getLength());
+        this.refresh();
+    },
     loanTaped: function (inSender, inEvent) {
-        // TODO: switch to the "details" view
+        console.log("TODO: switch to the 'details' view");
     }
 });
 
