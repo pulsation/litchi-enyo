@@ -99,11 +99,18 @@ enyo.kind({
         this.refresh();
     },
     loanTaped: function (inSender, inEvent) {
-        var appPanels = this.container.container;
+        // FIXME: calling container.container looks pretty ugly.
+        var appPanels = this.container.container,
+            what = appPanels.$.loanDetailsLayout.$.loanDetailsContainer.$.loanDetailsWhat;
+            who  = appPanels.$.loanDetailsLayout.$.loanDetailsContainer.$.loanDetailsWho;
         if (window.innerWidth < 800) {
             appPanels.next();
         }
-        console.log("TODO: Show loan detail");
+        litchi.loan.setCurrent(litchi.loans.getList()[inEvent.index]);
+        what.itemName = litchi.loan.getCurrent().item.name;
+        who.contactName = litchi.loan.getCurrent().contact.name;
+        what.itemNameChanged();
+        who.contactNameChanged();
     }
 });
 

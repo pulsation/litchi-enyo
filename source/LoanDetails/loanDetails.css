@@ -1,3 +1,7 @@
 .toolbar-right-button {
 	float: right; 
 }
+
+.loan-details-input {
+    width: 100%;
+}
