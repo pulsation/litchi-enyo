@@ -100,6 +100,8 @@ enyo.kind({
     },
     loanTaped: function (inSender, inEvent) {
         console.log("TODO: switch to the 'details' view");
+        var appPanels = this.container.container;
+        appPanels.next();
     }
 });
 

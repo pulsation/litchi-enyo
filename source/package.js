@@ -5,5 +5,6 @@ enyo.depends(
 	"App.css",
 	"App.js",
 
-    "LoanList"
+    "LoanList",
+    "LoanDetails"
 );

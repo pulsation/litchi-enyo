@@ -1,6 +1,7 @@
 .loan-list-layout {
 	background-color: #eeeeee;
 	border-right: 1px #cccccc solid;
+	width: 320px; 
 }
 
 .loan-list-item-name  {
