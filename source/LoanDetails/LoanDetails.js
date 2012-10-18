@@ -1,104 +1,104 @@
 enyo.kind({
-name: "LoanDetailsHeaderToolbar",
-kind: onyx.Toolbar,
-classes: "details-toolbar",
-components: [
-    {content: "Details"}
-]
+    name: "LoanDetailsHeaderToolbar",
+    kind: onyx.Toolbar,
+    classes: "details-toolbar",
+    components: [
+        {content: "Details"}
+    ]
 });
 
 enyo.kind({
-name: "LoanDetailsToolbarSave",
-kind: "onyx.Button",
-content: "Save"
+    name: "LoanDetailsToolbarSave",
+    kind: "onyx.Button",
+    content: "Save"
 });
 
 enyo.kind({
-name: "LoanDetailsToolbarDelete",
-kind: "onyx.Button",
-content: "Delete",
-classes: "toolbar-right-button"
+    name: "LoanDetailsToolbarDelete",
+    kind: "onyx.Button",
+    content: "Delete",
+    classes: "toolbar-right-button"
 });
 
 enyo.kind({
-name: "LoanDetailsToolbarReturn",
-kind: "onyx.Button",
-content: "Return"
+    name: "LoanDetailsToolbarReturn",
+    kind: "onyx.Button",
+    content: "Return"
 });
 
 enyo.kind({
-name: "LoanDetailsFooterToolbar",
-kind: onyx.Toolbar,
-classes: "details-toolbar, loan-toolbar",
-components: [
-    {kind: "onyx.Grabber", ontap: "detailsGrabberTapped" },
-    {kind: "LoanDetailsToolbarSave"},
-    {kind: "LoanDetailsToolbarDelete"},
-    {kind: "LoanDetailsToolbarReturn"}
-]
+    name: "LoanDetailsFooterToolbar",
+    kind: onyx.Toolbar,
+    classes: "details-toolbar, loan-toolbar",
+    components: [
+        {kind: "onyx.Grabber", ontap: "detailsGrabberTapped" },
+        {kind: "LoanDetailsToolbarSave"},
+        {kind: "LoanDetailsToolbarDelete"},
+        {kind: "LoanDetailsToolbarReturn"}
+    ]
 });
 
 enyo.kind({
-name: "LoanDetailsWhat",
-kind: "onyx.Groupbox",
-classes: "loan-details-gb",
-components: [
-    {kind: "onyx.GroupboxHeader", content: "What"},
-    {kind: "onyx.InputDecorator", components: [
-        {
-            kind: "onyx.Input",
-            name: "loanItemName",
-            //classes: "loan-details-input",
-            placeholder: "Item name"
-        }
-    ]}
-],
-published: [
-    "itemName"
-],
-itemNameChanged: function () {
-    this.$.loanItemName.setAttribute("value", this.itemName);
-}
+    name: "LoanDetailsWhat",
+    kind: "onyx.Groupbox",
+    classes: "loan-details-gb",
+    components: [
+        {kind: "onyx.GroupboxHeader", content: "What"},
+        {kind: "onyx.InputDecorator", components: [
+            {
+                kind: "onyx.Input",
+                name: "loanItemName",
+                //classes: "loan-details-input",
+                placeholder: "Item name"
+            }
+        ]}
+    ],
+    published: [
+        "itemName"
+    ],
+    itemNameChanged: function () {
+        this.$.loanItemName.setAttribute("value", this.itemName);
+    }
 });
 
 enyo.kind({
-name: "LoanDetailsWho",
-kind: "onyx.Groupbox",
-classes: "loan-details-gb",
-components: [
-    {kind: "onyx.GroupboxHeader", content: "Who"},
-    {kind: "onyx.InputDecorator", components: [
-        {
-            kind: "onyx.Input",
-            name: "loanContactName",
-            //classes: "loan-details-input",
-            placeholder: "Name"
-        }
-    ]},
-    {kind: "onyx.InputDecorator", components: [
-        {
-            kind: "onyx.Input",
-            name: "loanContactSurname",
-            // classes: "loan-details-input",
-            placeholder: "Surname"
-        }
-    ]}
-],
-published: [
-    "contactName",
-    "contactSurname"
-],
-infoChanged: function () {
-    this.$.loanContactName.setAttribute("value", this.contactName);
-    this.$.loanContactSurname.setAttribute("value", this.contactSurname);
-}
+    name: "LoanDetailsWho",
+    kind: "onyx.Groupbox",
+    classes: "loan-details-gb",
+    components: [
+        {kind: "onyx.GroupboxHeader", content: "Who"},
+        {kind: "onyx.InputDecorator", components: [
+            {
+                kind: "onyx.Input",
+                name: "loanContactName",
+                //classes: "loan-details-input",
+                placeholder: "Name"
+            }
+        ]},
+        {kind: "onyx.InputDecorator", components: [
+            {
+                kind: "onyx.Input",
+                name: "loanContactSurname",
+                // classes: "loan-details-input",
+                placeholder: "Surname"
+            }
+        ]}
+    ],
+    published: [
+        "contactName",
+        "contactSurname"
+    ],
+    infoChanged: function () {
+        this.$.loanContactName.setAttribute("value", this.contactName);
+        this.$.loanContactSurname.setAttribute("value", this.contactSurname);
+    }
 });
 
 enyo.kind({
-name: "LoanDetailsWhen",
-kind: "onyx.Groupbox",
-components: [
-    {kind: "onyx.GroupboxHeader", content: "When"},
+    name: "LoanDetailsWhen",
+    kind: "onyx.Groupbox",
+    components: [
+        {kind: "onyx.GroupboxHeader", content: "When"},
         {content: "Borrowed on"},
         {kind: "onyx.InputDecorator", components: [
             {
@@ -149,7 +149,9 @@ enyo.kind({
 enyo.kind({
     fit: true,
     name: "LoanDetailsContainer",
-    kind: "Scroller",touch:true,horizontal:"hidden",
+    kind: "Scroller",
+    touch: true,
+    horizontal: "hidden",
     components: [{
         classes: "loan-details-content",
         components: [
