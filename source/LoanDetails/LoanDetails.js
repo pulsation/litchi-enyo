@@ -119,8 +119,11 @@ enyo.kind({
         "dueOn"
     ],
     infoChanged: function () {
-        this.$.loanBorrowedOn.setAttribute("value", this.borrowedOn);
-        this.$.loanDueOn.setAttribute("value", this.dueOn);
+        var borrowedOn = new Date(this.borrowedOn),
+            dueOn = new Date(this.dueOn);
+
+        this.$.loanBorrowedOn.setAttribute("value", borrowedOn.getDate() + "/" + borrowedOn.getMonth() + "/" + borrowedOn.getFullYear());
+        this.$.loanDueOn.setAttribute("value", dueOn.getDate() + "/" + dueOn.getMonth() + "/" + dueOn.getFullYear());
     }
 });
 
