@@ -3,5 +3,14 @@
 }
 
 .loan-details-input {
-    width: 100%;
+    /*width: 10%;*/
 }
+
+.loan-details-gb {
+    padding-right: 10px;
+}
+
+.loan-details-icon {
+    height: 100px;
+}
+
