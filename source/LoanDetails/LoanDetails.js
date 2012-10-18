@@ -118,12 +118,14 @@ enyo.kind({
         "borrowedOn",
         "dueOn"
     ],
+    formatDate: function (isoDate) {
+        var d = new Date(isoDate);
+        
+        return ('0' + d.getDate()).slice(-2) + "/" + ('0' + d.getMonth()).slice(-2) + "/" + d.getFullYear();
+    },
     infoChanged: function () {
-        var borrowedOn = new Date(this.borrowedOn),
-            dueOn = new Date(this.dueOn);
-
-        this.$.loanBorrowedOn.setAttribute("value", borrowedOn.getDate() + "/" + borrowedOn.getMonth() + "/" + borrowedOn.getFullYear());
-        this.$.loanDueOn.setAttribute("value", dueOn.getDate() + "/" + dueOn.getMonth() + "/" + dueOn.getFullYear());
+        this.$.loanBorrowedOn.setAttribute("value", this.formatDate(this.borrowedOn));
+        this.$.loanDueOn.setAttribute("value", this.formatDate(this.dueOn));
     }
 });
 
