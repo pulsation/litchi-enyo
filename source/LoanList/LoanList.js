@@ -105,20 +105,23 @@ enyo.kind({
             what        = appPanels.$.loanDetailsLayout.$.loanDetailsContainer.$.loanDetailsWhat,
             who         = appPanels.$.loanDetailsLayout.$.loanDetailsContainer.$.loanDetailsWho,
             when        = appPanels.$.loanDetailsLayout.$.loanDetailsContainer.$.loanDetailsWhen,
+            fromTo      = appPanels.$.loanDetailsLayout.$.loanDetailsContainer.$.loanDetailsFromTo,
             currentLoan = litchi.loans.getList()[inEvent.index];
 
         if (window.innerWidth < 800) {
             appPanels.next();
         }
         litchi.loan.setCurrent(currentLoan);
-        what.itemName       = currentLoan.item.name;
-        who.contactName     = currentLoan.contact.name;
-        who.contactSurname  = currentLoan.contact.surname;
-        when.borrowedOn     = currentLoan.borrowedOn;
-        when.dueOn          = currentLoan.dueOn;
+        what.itemName           = currentLoan.item.name;
+        who.contactName         = currentLoan.contact.name;
+        who.contactSurname      = currentLoan.contact.surname;
+        when.borrowedOn         = currentLoan.borrowedOn;
+        when.dueOn              = currentLoan.dueOn;
+        fromTo.borrowedFromTo   = currentLoan.borrowedFromTo;
         what.itemNameChanged();
         who.infoChanged();
         when.infoChanged();
+        fromTo.borrowedFromToChanged();
     }
 });
 

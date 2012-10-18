@@ -141,9 +141,20 @@ enyo.kind({
     kind: "onyx.RadioGroup",
     onActivate: "fromToActivated",
     components: [
-        {content: "From", active: true},
-		{content: "To"}
-    ]
+        {name: "from", content: "From", active: true},
+		{name: "to", content: "To"}
+    ],
+    published: [
+        "borrowedFromTo"
+    ],
+    borrowedFromToChanged: function () {
+      if (this.borrowedFromTo == "to") {
+            this.$.to.setActive(true);
+        } else {
+            this.$.from.setActive(true);
+        }
+    
+    }
 });
 
 enyo.kind({
@@ -156,14 +167,20 @@ enyo.kind({
         classes: "loan-details-content",
         components: [
             {kind: "FittableColumns", components: [
-                {fit: true, components: [{kind: "LoanDetailsWhat"}, {tag: "br"}, {kind: "LoanDetailsFromTo"}]},
+                {fit: true, components: [
+                    {kind: "LoanDetailsWhat"},
+                    {tag: "br"},
+                    {kind: "LoanDetailsFromTo"}
+                ]},
                 {kind: "onyx.Button", components: [
                     {tag: "img", name: "itemImage", src: "assets/1350594803_6-Camera.png", fit: false, classes: "loan-details-icon"}
                 ]}
             ]},
             {tag: "br"},
             {kind: "FittableColumns", components: [
-                {fit: true, components: [{kind: "LoanDetailsWho"}]},
+                {fit: true, components: [
+                    {kind: "LoanDetailsWho"}
+                ]},
                 {kind: "onyx.Button", components: [
                     {tag: "img", name: "contactImage", src: "assets/1350569140_people.png", fit: false, classes: "loan-details-icon"}
                 ]}
