@@ -19,3 +19,7 @@
 .loan-list-add {
     float: right;
 }
+
+.loan-list-tab-selector {
+    width: 70px;
+}

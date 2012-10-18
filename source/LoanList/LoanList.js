@@ -12,36 +12,32 @@ enyo.kind({
 
 enyo.kind({
     name: "LoanListFilter",
-    kind: "onyx.PickerDecorator",
-    handlers: {
-		onSelect: "filterSelected"
-	},
+    kind: "onyx.RadioGroup",
+    onActivate: "filterSelected",
     filterSelected: function (inSender, inEvent) {
         litchi.loans.filterList(inEvent.selected.filterName);
     },
     components: [
-        {classes: "loan-list-filter"},
         {
-            kind: "onyx.Picker",
-            components: [
-                {
-                    content: "Due",
-                    filterName: "Due"
-                },
-                {
-                    content: "Borrowed from",
-                    filterName: "BorrowedFrom"
-                },
-                {
-                    content: "Borrowed to",
-                    filterName: "BorrowedTo"
-                },
-                {
-                    content: "All",
-                    filterName: "All",
-                    active: true
-                }
-            ]
+            content: "Due",
+            filterName: "Due",
+            classes: "loan-list-tab-selector"
+        },
+        {
+            content: "From",
+            filterName: "BorrowedFrom",
+            classes: "loan-list-tab-selector"
+        },
+        {
+            content: "To",
+            filterName: "BorrowedTo",
+            classes: "loan-list-tab-selector"
+        },
+        {
+            content: "All",
+            filterName: "All",
+            classes: "loan-list-tab-selector",
+            active: true
         }
     ]
 });
@@ -68,7 +64,12 @@ enyo.kind({
     components: [
         //{kind: "LoanListToolbarAdd"},
         {kind: "LoanListFilter"}
-    ]
+    ],
+    filterSelected: function (inSender, inEvent) {
+        if (inEvent.originator.getActive()) {
+        litchi.loans.filterList(inEvent.originator.filterName);
+        }
+    }
 });
 
 /**
