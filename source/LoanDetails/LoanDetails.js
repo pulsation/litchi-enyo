@@ -148,25 +148,27 @@ enyo.kind({
 
 enyo.kind({
     fit: true,
-    style: "padding: 10px;",
     name: "LoanDetailsContainer",
-    kind: "FittableRows",
-    components: [
-        {kind: "FittableColumns", components: [
-            {fit: true, components: [{kind: "LoanDetailsWhat"}, {tag: "br"}, {kind: "LoanDetailsFromTo"}]},
-            {kind: "onyx.Button", components: [
-                {tag: "img", name: "itemImage", src: "assets/1350594803_6-Camera.png", fit: false, classes: "loan-details-icon"}
-            ]}
-        ]},
-        {tag: "br"},
-        {kind: "FittableColumns", components: [
-            {fit: true, components: [{kind: "LoanDetailsWho"}]},
-            {kind: "onyx.Button", components: [
-                {tag: "img", name: "contactImage", src: "assets/1350569140_people.png", fit: false, classes: "loan-details-icon"}
-            ]}
-        ]},
-        {tag: "br"},
-        {kind: "LoanDetailsWhen"}
+    kind: "Scroller",touch:true,horizontal:"hidden",
+    components: [{
+        classes: "loan-details-content",
+        components: [
+            {kind: "FittableColumns", components: [
+                {fit: true, components: [{kind: "LoanDetailsWhat"}, {tag: "br"}, {kind: "LoanDetailsFromTo"}]},
+                {kind: "onyx.Button", components: [
+                    {tag: "img", name: "itemImage", src: "assets/1350594803_6-Camera.png", fit: false, classes: "loan-details-icon"}
+                ]}
+            ]},
+            {tag: "br"},
+            {kind: "FittableColumns", components: [
+                {fit: true, components: [{kind: "LoanDetailsWho"}]},
+                {kind: "onyx.Button", components: [
+                    {tag: "img", name: "contactImage", src: "assets/1350569140_people.png", fit: false, classes: "loan-details-icon"}
+                ]}
+            ]},
+            {tag: "br"},
+            {kind: "LoanDetailsWhen"}
+        ]}
     ]
 });
 
