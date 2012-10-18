@@ -102,16 +102,23 @@ enyo.kind({
     loanTaped: function (inSender, inEvent) {
         // FIXME: calling container.container looks pretty ugly.
         var appPanels = this.container.container,
-            what = appPanels.$.loanDetailsLayout.$.loanDetailsContainer.$.loanDetailsWhat;
-            who  = appPanels.$.loanDetailsLayout.$.loanDetailsContainer.$.loanDetailsWho;
+            what        = appPanels.$.loanDetailsLayout.$.loanDetailsContainer.$.loanDetailsWhat,
+            who         = appPanels.$.loanDetailsLayout.$.loanDetailsContainer.$.loanDetailsWho,
+            when        = appPanels.$.loanDetailsLayout.$.loanDetailsContainer.$.loanDetailsWhen,
+            currentLoan = litchi.loans.getList()[inEvent.index];
+
         if (window.innerWidth < 800) {
             appPanels.next();
         }
-        litchi.loan.setCurrent(litchi.loans.getList()[inEvent.index]);
-        what.itemName = litchi.loan.getCurrent().item.name;
-        who.contactName = litchi.loan.getCurrent().contact.name;
+        litchi.loan.setCurrent(currentLoan);
+        what.itemName       = currentLoan.item.name;
+        who.contactName     = currentLoan.contact.name;
+        who.contactSurname  = currentLoan.contact.surname;
+        when.borrowedOn     = currentLoan.borrowedOn;
+        when.dueOn          = currentLoan.dueOn;
         what.itemNameChanged();
-        who.contactNameChanged();
+        who.infoChanged();
+        when.infoChanged();
     }
 });
 

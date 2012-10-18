@@ -72,15 +72,58 @@ enyo.kind({
                 classes: "loan-details-input",
                 placeholder: "Name"
             }
+        ]},
+        {kind: "onyx.InputDecorator", components: [
+			{
+                kind: "onyx.Input",
+                name: "loanContactSurname",
+                classes: "loan-details-input",
+                placeholder: "Surname"
+            }
 		]}
     ],
     published: [
-        "contactName"
+        "contactName",
+        "contactSurname"
     ],
-    contactNameChanged: function () {
+    infoChanged: function () {
         this.$.loanContactName.setAttribute("value", this.contactName);
+        this.$.loanContactSurname.setAttribute("value", this.contactSurname);
     }
 });
+
+enyo.kind({
+    name: "LoanDetailsWhen",
+    kind: "onyx.Groupbox",
+    components: [
+        {kind: "onyx.GroupboxHeader", content: "When"},
+        {kind: "onyx.InputDecorator", components: [
+			{
+                kind: "onyx.Input",
+                name: "loanBorrowedOn",
+                classes: "loan-details-input",
+                placeholder: "Date borrowed"
+            }
+        ]},
+        {kind: "onyx.InputDecorator", components: [
+			{
+                kind: "onyx.Input",
+                name: "loanDueOn",
+                classes: "loan-details-input",
+                placeholder: "Due on"
+            }
+		]}
+    ],
+    published: [
+        "borrowedOn",
+        "dueOn"
+    ],
+    infoChanged: function () {
+        this.$.loanBorrowedOn.setAttribute("value", this.borrowedOn);
+        this.$.loanDueOn.setAttribute("value", this.dueOn);
+    }
+});
+
 enyo.kind({
     name: "LoanDetailsFromTo",
     kind: "onyx.RadioGroup",
@@ -98,9 +141,15 @@ enyo.kind({
     components: [
         {kind: "LoanDetailsWhat"},
         {tag: "br"},
-        {kind: "LoanDetailsFromTo"},
+        {kind: "FittableColumns", components: [
+            {kind: "LoanDetailsFromTo"},
+            {style: "text-align: center", components: [{kind: "onyx.Button", content: "Photo"}], fit: true},
+            {kind: "onyx.Button", content: "Contact"}
+        ]},
         {tag: "br"},
-        {kind: "LoanDetailsWho"}
+        {kind: "LoanDetailsWho"},
+        {tag: "br"},
+        {kind: "LoanDetailsWhen"},
     ]
 });
 
