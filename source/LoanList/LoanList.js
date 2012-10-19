@@ -106,6 +106,7 @@ enyo.kind({
             who         = appPanels.$.loanDetailsLayout.$.loanDetailsContainer.$.loanDetailsWho,
             when        = appPanels.$.loanDetailsLayout.$.loanDetailsContainer.$.loanDetailsWhen,
             fromTo      = appPanels.$.loanDetailsLayout.$.loanDetailsContainer.$.loanDetailsFromTo,
+            itemImage   = appPanels.$.loanDetailsLayout.$.loanDetailsContainer.$.itemImage,
             currentLoan = litchi.loans.getList()[inEvent.index];
 
         if (window.innerWidth < 800) {
@@ -118,10 +119,13 @@ enyo.kind({
         when.borrowedOn         = currentLoan.borrowedOn;
         when.dueOn              = currentLoan.dueOn;
         fromTo.borrowedFromTo   = currentLoan.borrowedFromTo;
+        itemImage.image         = currentLoan.item.image;
+
         what.itemNameChanged();
         who.infoChanged();
         when.infoChanged();
         fromTo.borrowedFromToChanged();
+        itemImage.imageChanged();
     }
 });
 

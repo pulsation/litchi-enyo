@@ -174,15 +174,18 @@ enyo.kind({
                         {
                             tag: "img",
                             name: "itemImage",
-                            src: "assets/1350594803_6-Camera.png",
+                            src: litchi.defaults.itemImageUrl,
                             fit: false,
                             classes: "loan-details-icon",
                             published: [
                                 "image"
                             ],
                             imageChanged: function () {
-                                this.setAttribute("src", "data:image/jpeg;base64," + this.image);
-                                
+                                if (typeof (this.image) === "undefined") {
+                                    this.setAttribute("src", litchi.defaults.itemImageUrl);
+                                } else {
+                                    this.setAttribute("src", "data:image/jpeg;base64," + this.image);
+                                }
                             }
                         }
                     ]
@@ -200,7 +203,7 @@ enyo.kind({
                         {
                             tag: "img",
                             name: "contactImage",
-                            src: "assets/1350569140_people.png",
+                            src: litchi.defaults.contactImageUrl,
                             fit: false,
                             classes: "loan-details-icon"
                         }
