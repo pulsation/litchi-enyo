@@ -176,7 +176,14 @@ enyo.kind({
                             name: "itemImage",
                             src: "assets/1350594803_6-Camera.png",
                             fit: false,
-                            classes: "loan-details-icon"
+                            classes: "loan-details-icon",
+                            published: [
+                                "image"
+                            ],
+                            imageChanged: function () {
+                                this.setAttribute("src", "data:image/jpeg;base64," + this.image);
+                                
+                            }
                         }
                     ]
                 }
@@ -211,9 +218,9 @@ enyo.kind({
         navigator.camera.getPicture(
             // Success
             function (imageData) {
-                console.log("TODO: update image data.");
-                itemImageCtrl.setAttribute("src", "data:image/jpeg;base64," + imageData);
-                console.log(imageData);
+                itemImageCtrl.image = imageData;
+                itemImageCtrl.imageChanged();
+                litchi.loan.getCurrent().item.image = imageData;
             },
             // Failure
             function (message) {
@@ -221,9 +228,10 @@ enyo.kind({
             },
             // Options
             {
-                quality: 25,
+                quality: 10,
                 destinationType: Camera.DestinationType.DATA_URL
-            });
+            }
+        );
         console.log("TODO: Take item photo");
     },
 
