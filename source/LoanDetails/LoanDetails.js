@@ -206,11 +206,14 @@ enyo.kind({
     }],
 
     takeItemPhoto: function (inSender, inEvent) {
+        var itemImageCtrl = this.$.itemImage;
+
         navigator.camera.getPicture(
             // Success
             function (imageData) {
                 console.log("TODO: update image data.");
-                this.$.itemImage.setAttribute("src", "data:image/jpeg;base64," + imageData);
+                itemImageCtrl.setAttribute("src", "data:image/jpeg;base64," + imageData);
+                console.log(imageData);
             },
             // Failure
             function (message) {
@@ -219,7 +222,7 @@ enyo.kind({
             // Options
             {
                 quality: 25,
-                destinationType: 0 // Camera.DestinationType.DATA_URL 
+                destinationType: Camera.DestinationType.DATA_URL
             });
         console.log("TODO: Take item photo");
     },
