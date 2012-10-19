@@ -48,7 +48,6 @@ enyo.kind({
             {
                 kind: "onyx.Input",
                 name: "loanItemName",
-                //classes: "loan-details-input",
                 placeholder: "Item name"
             }
         ]}
@@ -71,7 +70,6 @@ enyo.kind({
             {
                 kind: "onyx.Input",
                 name: "loanContactName",
-                //classes: "loan-details-input",
                 placeholder: "Name"
             }
         ]},
@@ -79,7 +77,6 @@ enyo.kind({
             {
                 kind: "onyx.Input",
                 name: "loanContactSurname",
-                // classes: "loan-details-input",
                 placeholder: "Surname"
             }
         ]}
@@ -104,7 +101,6 @@ enyo.kind({
             {
                 kind: "onyx.Input",
                 name: "loanBorrowedOn",
-                classes: "loan-details-input",
                 placeholder: "Date borrowed"
             }
         ]},
@@ -113,7 +109,6 @@ enyo.kind({
 			{
                 kind: "onyx.Input",
                 name: "loanDueOn",
-                classes: "loan-details-input",
                 placeholder: "Due on"
             }
 		]}
@@ -148,7 +143,7 @@ enyo.kind({
         "borrowedFromTo"
     ],
     borrowedFromToChanged: function () {
-      if (this.borrowedFromTo == "to") {
+        if (this.borrowedFromTo === "to") {
             this.$.to.setActive(true);
         } else {
             this.$.from.setActive(true);
@@ -172,23 +167,66 @@ enyo.kind({
                     {tag: "br"},
                     {kind: "LoanDetailsFromTo"}
                 ]},
-                {kind: "onyx.Button", components: [
-                    {tag: "img", name: "itemImage", src: "assets/1350594803_6-Camera.png", fit: false, classes: "loan-details-icon"}
-                ]}
+                {
+                    kind: "onyx.Button",
+                    ontap: "takeItemPhoto",
+                    components: [
+                        {
+                            tag: "img",
+                            name: "itemImage",
+                            src: "assets/1350594803_6-Camera.png",
+                            fit: false,
+                            classes: "loan-details-icon"
+                        }
+                    ]
+                }
             ]},
             {tag: "br"},
             {kind: "FittableColumns", components: [
                 {fit: true, components: [
                     {kind: "LoanDetailsWho"}
                 ]},
-                {kind: "onyx.Button", components: [
-                    {tag: "img", name: "contactImage", src: "assets/1350569140_people.png", fit: false, classes: "loan-details-icon"}
-                ]}
+                {
+                    kind: "onyx.Button",
+                    ontap: "loanSelectContact",
+                    components: [
+                        {
+                            tag: "img",
+                            name: "contactImage",
+                            src: "assets/1350569140_people.png",
+                            fit: false,
+                            classes: "loan-details-icon"
+                        }
+                    ]
+                }
             ]},
             {tag: "br"},
             {kind: "LoanDetailsWhen"}
-        ]}
-    ]
+        ]
+    }],
+
+    takeItemPhoto: function (inSender, inEvent) {
+        navigator.camera.getPicture(
+            // Success
+            function (imageData) {
+                console.log("TODO: update image data.");
+                this.$.itemImage.setAttribute("src", "data:image/jpeg;base64," + imageData);
+            },
+            // Failure
+            function (message) {
+                console.log("TODO: alert user if taking photo failed.");
+            },
+            // Options
+            {
+                quality: 25,
+                destinationType: 0 // Camera.DestinationType.DATA_URL 
+            });
+        console.log("TODO: Take item photo");
+    },
+
+    chooseContact: function (inSender, inEvent) {
+        console.log("TODO: Choose contact");
+    }
 });
 
 enyo.kind({
