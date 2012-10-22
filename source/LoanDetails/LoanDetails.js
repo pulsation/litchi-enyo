@@ -198,7 +198,7 @@ enyo.kind({
                 ]},
                 {
                     kind: "onyx.Button",
-                    ontap: "loanSelectContact",
+                    ontap: "chooseContact",
                     components: [
                         {
                             tag: "img",
@@ -239,6 +239,21 @@ enyo.kind({
     },
 
     chooseContact: function (inSender, inEvent) {
+        var options = new ContactFindOptions(),
+            fields = ["displayName", "name", "photos"];
+
+        options.filter = "";
+        navigator.contacts.find(
+            fields,
+            function (contacts) {
+                console.log("TODO: success retrieving contacts");
+                console.log(contacts);
+            },
+            function(error) {
+                console.log("TOODO: error retrieving contacts");
+            },
+            options);
+        
         console.log("TODO: Choose contact");
     }
 });
