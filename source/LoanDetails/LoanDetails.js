@@ -249,10 +249,11 @@ enyo.kind({
                 console.log("TODO: success retrieving contacts");
                 console.log(contacts);
             },
-            function(error) {
+            function (error) {
                 console.log("TOODO: error retrieving contacts");
             },
-            options);
+            options
+        );
         
         console.log("TODO: Choose contact");
     }
