@@ -1,0 +1,21 @@
+.contact-list-layout {
+	width: 320px; 
+}
+
+.contact-list-item-name  {
+	padding: 8px;
+}
+
+.contact-list-item {
+    padding: 2px;    
+    border-top: 1px white solid;
+    border-bottom: 1px lightgray solid;
+}
+
+.contact-list-add {
+    float: right;
+}
+
+.contact-list-tab-selector {
+    width: 70px;
+}

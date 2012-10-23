@@ -2,13 +2,21 @@
 enyo.dispatcher.listen(document, "deviceready");
 
 enyo.kind({
-	name: "App",
+    name: "App",
     realtimeFit: true,
     kind: "Panels",
-    arrangerKind: "CollapsingArranger",
-	fit: true,
-	components:[
-		{kind: "LoanListLayout"},
-        {kind: "LoanDetailsLayout"}
-	]
+    components: [{
+        name: "mainPanels",
+        realtimeFit: true,
+        kind: "Panels",
+        arrangerKind: "CollapsingArranger",
+        onTransitionFinish: "panelChanged",
+        components: [
+            {kind: "LoanListLayout"},
+            {kind: "LoanDetailsLayout"},
+            {kind: "ContactListLayout"}
+        ]
+    }],
+    panelChanged : function () { console.log("TODO: transition finished"); }
+
 });
