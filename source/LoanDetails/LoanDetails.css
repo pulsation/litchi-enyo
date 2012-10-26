@@ -1,0 +1,15 @@
+.toolbar-right-button {
+	float: right; 
+}
+
+.loan-details-gb {
+    padding-right: 10px;
+}
+
+.loan-details-icon {
+    height: 100px;
+}
+
+.loan-details-content {
+    padding: 10px;
+}
