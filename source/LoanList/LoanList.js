@@ -89,7 +89,6 @@ enyo.kind({
     name: "LoanList",
     kind: "List",
     fit: true,
-    touch: true,
     onSetupItem: "loanListSetupItem",
     components: [
         {kind: "LoanListItem"},

@@ -156,7 +156,6 @@ enyo.kind({
     fit: true,
     name: "LoanDetailsContainer",
     kind: "Scroller",
-    touch: true,
     horizontal: "hidden",
     components: [{
         classes: "loan-details-content",
