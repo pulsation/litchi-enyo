@@ -31,10 +31,7 @@ enyo.kind({
     components: [
         {kind: "ContactListItem"}
     ],
-    /*
-    updateList: function (inSender, inEvent) {
-        this.refresh();
-    },*/
+
     contactTaped: function (inSender, inEvent) {
         console.log("TODO : contact taped");
     }
@@ -83,30 +80,35 @@ enyo.kind({
     centered: true,
     modal: true,
     handlers: {
-        onShow: "_show"
+        onShow: "findAndShow",
+        onHide: "freeAndHide"
     },
     components: [ {kind: "ContactListLayout", name: "contactListLayout" } ],
 
-    _show: function () {
+    /**
+     * Finds contacts and show them.
+     */
+    findAndShow: function () {
         var options = new ContactFindOptions(),
             fields  = ["displayName", "name", "photos"],
             self    = this;
         this.inherited(arguments);
 
-        console.log("onShow");
-
         options.filter = "";
         navigator.contacts.find(
             fields,
             function (loadedContacts) {
-                console.log("DEBUG: success retrieving contacts");
                 self.$.contactListLayout.setContacts(loadedContacts);
             },
             function (error) {
-                console.log("TOODO: error retrieving contacts");
+                console.log("TODO: error retrieving contacts");
             },
             options
         );
+    },
+
+    freeAndHide: function () {
+        this.$.contactListLayout.setContacts([]);
     }
 
 });
