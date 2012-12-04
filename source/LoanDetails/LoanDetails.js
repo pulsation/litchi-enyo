@@ -1,4 +1,4 @@
-/* global Camera */
+/* global Camera, ContactFindOptions, litchi */
 
 enyo.kind({
     name: "LoanDetailsHeaderToolbar",
@@ -245,14 +245,16 @@ enyo.kind({
 
     chooseContact: function (inSender, inEvent) {
         var options = new ContactFindOptions(),
-            fields = ["displayName", "name", "photos"];
+            fields  = ["displayName", "name", "photos"],
+            self    = this;
 
         options.filter = "";
         navigator.contacts.find(
             fields,
-            function (contacts) {
+            function (loadedContacts) {
                 console.log("DEBUG: success retrieving contacts");
-                console.log(contacts);
+                self.$.contactListPopup.$.contactListLayout.setContacts(loadedContacts);
+                self.$.contactListPopup.show();
             },
             function (error) {
                 console.log("TOODO: error retrieving contacts");
@@ -261,7 +263,6 @@ enyo.kind({
         );
         
         console.log("TODO: Choose contact");
-        this.$.contactListPopup.show();
     }
 });
 

@@ -46,18 +46,30 @@ enyo.kind({
     name: "ContactListLayout",
 	classes: "contact-list-layout",
     kind: "FittableRows",
+
+    published: {
+        contacts: []
+    },
+
+    contactsChanged: function (inOldValue) {
+        this.$.contactList.setCount(this.contacts.length);
+    },
+
     components: [
         {kind: "ContactListHeaderToolbar"},
         {kind: "ContactList"}
     ],
+
     contactListSetupItem: function (nSender, inEvent) {
-        this.$.contactList.$.contactListItem.$.name.setContent("Test");
+        var contacts = this.getContacts();
+        this.$.contactList.$.contactListItem.$.name.setContent(contacts[inEvent.index].displayName);
         return true;
     },
+
     create: function () {
         this.inherited(arguments);
-        this.$.contactList.setCount(5);
     },
+
     onTransitionFinish: "panelChanged"
 });
 
@@ -66,5 +78,5 @@ enyo.kind({
     kind: "enyo.Popup",
     floating: true,
     centered: true,
-    components: [ {kind: "ContactListLayout" } ]
+    components: [ {kind: "ContactListLayout", name: "contactListLayout" } ]
 });
