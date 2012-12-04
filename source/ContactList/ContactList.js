@@ -31,9 +31,10 @@ enyo.kind({
     components: [
         {kind: "ContactListItem"}
     ],
+    /*
     updateList: function (inSender, inEvent) {
         this.refresh();
-    },
+    },*/
     contactTaped: function (inSender, inEvent) {
         console.log("TODO : contact taped");
     }
@@ -52,7 +53,10 @@ enyo.kind({
     },
 
     contactsChanged: function (inOldValue) {
+        console.log("contactsChanged");
         this.$.contactList.setCount(this.contacts.length);
+        this.$.contactList.refresh();
+
     },
 
     components: [
@@ -68,15 +72,41 @@ enyo.kind({
 
     create: function () {
         this.inherited(arguments);
-    },
+    }
 
-    onTransitionFinish: "panelChanged"
 });
 
 enyo.kind({
     name: "ContactListPopup",
-    kind: "enyo.Popup",
+    kind: "onyx.Popup",
     floating: true,
     centered: true,
-    components: [ {kind: "ContactListLayout", name: "contactListLayout" } ]
+    modal: true,
+    handlers: {
+        onShow: "_show"
+    },
+    components: [ {kind: "ContactListLayout", name: "contactListLayout" } ],
+
+    _show: function () {
+        var options = new ContactFindOptions(),
+            fields  = ["displayName", "name", "photos"],
+            self    = this;
+        this.inherited(arguments);
+
+        console.log("onShow");
+
+        options.filter = "";
+        navigator.contacts.find(
+            fields,
+            function (loadedContacts) {
+                console.log("DEBUG: success retrieving contacts");
+                self.$.contactListLayout.setContacts(loadedContacts);
+            },
+            function (error) {
+                console.log("TOODO: error retrieving contacts");
+            },
+            options
+        );
+    }
+
 });

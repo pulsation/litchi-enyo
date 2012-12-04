@@ -244,6 +244,7 @@ enyo.kind({
     },
 
     chooseContact: function (inSender, inEvent) {
+        /*
         var options = new ContactFindOptions(),
             fields  = ["displayName", "name", "photos"],
             self    = this;
@@ -261,7 +262,8 @@ enyo.kind({
             },
             options
         );
-        
+       */
+        this.$.contactListPopup.show();
         console.log("TODO: Choose contact");
     }
 });
