@@ -33,6 +33,13 @@ enyo.kind({
     ],
 
     contactTaped: function (inSender, inEvent) {
+        // FIXME: there should be another way than calling this.container
+        var chosenContact = this.container.contacts[inEvent.index],
+            loanDetails   = this.container.container.container.container.container;
+        console.log(chosenContact);
+        loanDetails.$.loanDetailsWho.contactName = chosenContact.displayName;
+        loanDetails.$.loanDetailsWho.infoChanged();
+        
         console.log("TODO : contact taped");
     }
 });
