@@ -56,7 +56,7 @@ enyo.kind({
     },
     create: function () {
         this.inherited(arguments);
-        this.$.contactList.setCount(1);
+        this.$.contactList.setCount(5);
     },
     onTransitionFinish: "panelChanged"
 });
