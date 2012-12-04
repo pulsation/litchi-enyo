@@ -13,8 +13,8 @@ enyo.kind({
         onTransitionFinish: "panelChanged",
         components: [
             {kind: "LoanListLayout"},
-            {kind: "LoanDetailsLayout"},
-            {kind: "ContactListLayout"}
+            {kind: "LoanDetailsLayout"}/*,
+            {kind: "ContactListLayout"}*/
         ]
     }],
     panelChanged : function () { console.log("TODO: transition finished"); }

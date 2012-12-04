@@ -60,3 +60,11 @@ enyo.kind({
     },
     onTransitionFinish: "panelChanged"
 });
+
+enyo.kind({
+    name: "ContactListPopup",
+    kind: "enyo.Popup",
+    floating: true,
+    centered: true,
+    components: [ {kind: "ContactListLayout" } ]
+});

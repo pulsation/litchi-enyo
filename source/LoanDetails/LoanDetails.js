@@ -1,3 +1,5 @@
+/* global Camera */
+
 enyo.kind({
     name: "LoanDetailsHeaderToolbar",
     kind: onyx.Toolbar,
@@ -208,6 +210,10 @@ enyo.kind({
                             classes: "loan-details-icon"
                         }
                     ]
+                },
+                {
+                    kind: "ContactListPopup",
+                    name: "contactListPopup"
                 }
             ]},
             {tag: "br"},
@@ -235,7 +241,6 @@ enyo.kind({
                 destinationType: Camera.DestinationType.DATA_URL
             }
         );
-        console.log("TODO: Take item photo");
     },
 
     chooseContact: function (inSender, inEvent) {
@@ -246,7 +251,7 @@ enyo.kind({
         navigator.contacts.find(
             fields,
             function (contacts) {
-                console.log("TODO: success retrieving contacts");
+                console.log("DEBUG: success retrieving contacts");
                 console.log(contacts);
             },
             function (error) {
@@ -256,6 +261,7 @@ enyo.kind({
         );
         
         console.log("TODO: Choose contact");
+        this.$.contactListPopup.show();
     }
 });
 
