@@ -32,9 +32,20 @@ enyo.kind({
         {kind: "ContactListItem"}
     ],
 
+    published: {
+        contacts: []
+    },
+
+    contactsChanged: function (inOldValue) {
+        console.log("contactsChanged");
+        this.setCount(this.contacts.length);
+        this.refresh();
+
+    },
+
     contactTaped: function (inSender, inEvent) {
         // FIXME: there should be another way than calling this.container
-        var chosenContact = this.container.contacts[inEvent.index],
+        var chosenContact = this.contacts[inEvent.index],
             loanDetails   = this.container.container.container.container.container;
         console.log(chosenContact);
         loanDetails.$.loanDetailsWho.contactName = chosenContact.displayName;
@@ -52,24 +63,13 @@ enyo.kind({
 	classes: "contact-list-layout",
     kind: "FittableRows",
 
-    published: {
-        contacts: []
-    },
-
-    contactsChanged: function (inOldValue) {
-        console.log("contactsChanged");
-        this.$.contactList.setCount(this.contacts.length);
-        this.$.contactList.refresh();
-
-    },
-
     components: [
         {kind: "ContactListHeaderToolbar"},
         {kind: "ContactList"}
     ],
 
     contactListSetupItem: function (nSender, inEvent) {
-        var contacts = this.getContacts();
+        var contacts = this.$.contactList.getContacts();
         this.$.contactList.$.contactListItem.$.name.setContent(contacts[inEvent.index].displayName);
         return true;
     },
@@ -105,7 +105,7 @@ enyo.kind({
         navigator.contacts.find(
             fields,
             function (loadedContacts) {
-                self.$.contactListLayout.setContacts(loadedContacts);
+                self.$.contactListLayout.$.contactList.setContacts(loadedContacts);
             },
             function (error) {
                 console.log("TODO: error retrieving contacts");
@@ -115,7 +115,7 @@ enyo.kind({
     },
 
     freeAndHide: function () {
-        this.$.contactListLayout.setContacts([]);
+        this.$.contactListLayout.$.contactList.setContacts([]);
     }
 
 });
