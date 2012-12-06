@@ -85,8 +85,17 @@ enyo.kind({
     modal: true,
     handlers: {
         onShow: "findAndShow",
-        onHide: "freeAndHide"
+        onHide: "freeAndHide",
+        onContactChosen: "contactChosen"
     },
+
+    contactChosen: function () {
+        this.hide();
+
+        // continue propagation to update loan details.
+        return false;
+    },
+
     components: [ {kind: "ContactListLayout", name: "contactListLayout" } ],
 
     /**

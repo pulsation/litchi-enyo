@@ -177,6 +177,7 @@ enyo.kind({
         this.$.loanDetailsWho.contactSurname    = contactGivenName;
         this.$.loanDetailsWho.infoChanged();
 
+        // stop propagation.
         return true;
     },
     components: [{
