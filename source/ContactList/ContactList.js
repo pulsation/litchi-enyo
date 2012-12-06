@@ -36,6 +36,8 @@ enyo.kind({
         contacts: []
     },
 
+    events: { onContactChosen: "" },
+
     contactsChanged: function (inOldValue) {
         console.log("contactsChanged");
         this.setCount(this.contacts.length);
@@ -44,14 +46,8 @@ enyo.kind({
     },
 
     contactTaped: function (inSender, inEvent) {
-        // FIXME: there should be another way than calling this.container
-        var chosenContact = this.contacts[inEvent.index],
-            loanDetails   = this.container.container.container.container.container;
-        console.log(chosenContact);
-        loanDetails.$.loanDetailsWho.contactName = chosenContact.displayName;
-        loanDetails.$.loanDetailsWho.infoChanged();
-        
-        console.log("TODO : contact taped");
+        var chosenContact = this.contacts[inEvent.index];
+        this.doContactChosen(chosenContact);
     }
 });
 

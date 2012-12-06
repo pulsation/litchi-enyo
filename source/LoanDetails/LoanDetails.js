@@ -96,6 +96,7 @@ enyo.kind({
 enyo.kind({
     name: "LoanDetailsWhen",
     kind: "onyx.Groupbox",
+
     components: [
         {kind: "onyx.GroupboxHeader", content: "When"},
         {content: "Borrowed on"},
@@ -160,8 +161,19 @@ enyo.kind({
     kind: "Scroller",
     touch: true,
     horizontal: "hidden",
+    handlers: { onContactChosen: "contactChosen" },
+
+    contactChosen: function (inSender, inEvent) {
+
+        this.$.loanDetailsWho.contactName = inEvent.displayName;
+        this.$.loanDetailsWho.infoChanged();
+
+        return true;
+    },
     components: [{
         classes: "loan-details-content",
+
+
         components: [
             {kind: "FittableColumns", components: [
                 {fit: true, components: [
@@ -194,7 +206,7 @@ enyo.kind({
                 }
             ]},
             {tag: "br"},
-            {kind: "FittableColumns", components: [
+            {kind: "FittableColumns", name: "toto", components: [
                 {fit: true, components: [
                     {kind: "LoanDetailsWho"}
                 ]},
