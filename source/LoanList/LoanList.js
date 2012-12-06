@@ -1,3 +1,5 @@
+/* global litchi */
+
 /**
  * Add button.
  */
@@ -103,35 +105,9 @@ enyo.kind({
     },
     loanTaped: function (inSender, inEvent) {
         // FIXME: calling container.container looks pretty ugly.
-        var appPanels = this.container.container.container,
-            what        = appPanels.$.loanDetailsLayout.$.loanDetailsContainer.$.loanDetailsWhat,
-            who         = appPanels.$.loanDetailsLayout.$.loanDetailsContainer.$.loanDetailsWho,
-            when        = appPanels.$.loanDetailsLayout.$.loanDetailsContainer.$.loanDetailsWhen,
-            fromTo      = appPanels.$.loanDetailsLayout.$.loanDetailsContainer.$.loanDetailsFromTo,
-            itemImage   = appPanels.$.loanDetailsLayout.$.loanDetailsContainer.$.itemImage,
-            currentLoan = litchi.loans.getList()[inEvent.index];
+        var currentLoan = litchi.loans.getList()[inEvent.index];
 
-/*
-        if (window.innerWidth < 800) {
-            appPanels.$.mainPanels.next();
-        }
-        */
         litchi.loan.setCurrent(currentLoan);
-        /*
-        what.itemName           = currentLoan.item.name;
-        who.contactName         = currentLoan.contact.name;
-        who.contactSurname      = currentLoan.contact.surname;
-        when.borrowedOn         = currentLoan.borrowedOn;
-        when.dueOn              = currentLoan.dueOn;
-        fromTo.borrowedFromTo   = currentLoan.borrowedFromTo;
-        itemImage.image         = currentLoan.item.image;
-
-        what.itemNameChanged();
-        who.infoChanged();
-        when.infoChanged();
-        fromTo.borrowedFromToChanged();
-        itemImage.imageChanged();
-*/
         this.doLoanChosen(currentLoan);
     }
 });

@@ -54,10 +54,10 @@ enyo.kind({
             }
         ]}
     ],
-    published: [
-        "itemName"
-    ],
-    itemNameChanged: function () {
+    published: {
+        itemName: ""
+    },
+    itemNameChanged: function (inOldValue) {
         this.$.loanItemName.setAttribute("value", this.itemName);
     }
 });
@@ -83,12 +83,14 @@ enyo.kind({
             }
         ]}
     ],
-    published: [
-        "contactName",
-        "contactSurname"
-    ],
-    infoChanged: function () {
+    published: {
+        contactName: "",
+        contactSurname: ""
+    },
+    contactNameChanged: function (inOldValue) {
         this.$.loanContactName.setAttribute("value", this.contactName);
+    },
+    contactSurnameChanged: function (inOldValue) {
         this.$.loanContactSurname.setAttribute("value", this.contactSurname);
     }
 });
@@ -116,10 +118,10 @@ enyo.kind({
             }
 		]}
     ],
-    published: [
-        "borrowedOn",
-        "dueOn"
-    ],
+    published: {
+        borrowedOn: "",
+        dueOn: ""
+    },
     /**
      * Make a date readable.
      */
@@ -128,8 +130,10 @@ enyo.kind({
         
         return ('0' + d.getDate()).slice(-2) + "/" + ('0' + d.getMonth()).slice(-2) + "/" + d.getFullYear();
     },
-    infoChanged: function () {
+    borrowedOnChanged: function () {
         this.$.loanBorrowedOn.setAttribute("value", this.formatDate(this.borrowedOn));
+    },
+    dueOnChanged: function () {
         this.$.loanDueOn.setAttribute("value", this.formatDate(this.dueOn));
     }
 });
@@ -142,9 +146,9 @@ enyo.kind({
         {name: "from", content: "From", active: true},
 		{name: "to", content: "To"}
     ],
-    published: [
-        "borrowedFromTo"
-    ],
+    published: {
+        borrowedFromTo: ""
+    },
     borrowedFromToChanged: function () {
         if (this.borrowedFromTo === "to") {
             this.$.to.setActive(true);
@@ -152,6 +156,24 @@ enyo.kind({
             this.$.from.setActive(true);
         }
     
+    }
+});
+
+enyo.kind({
+    tag: "img",
+    name: "ItemImage",
+    src: litchi.defaults.itemImageUrl,
+    fit: false,
+    classes: "loan-details-icon",
+    published: {
+        image: null
+    },
+    imageChanged: function () {
+        if (this.image === undefined) {
+            this.setAttribute("src", litchi.defaults.itemImageUrl);
+        } else {
+            this.setAttribute("src", "data:image/jpeg;base64," + this.image);
+        }
     }
 });
 
@@ -182,9 +204,8 @@ enyo.kind({
             contactGivenName    = contactName.formatted.split(" ")[1];
         }
 
-        this.$.loanDetailsWho.contactName       = contactFamilyName;
-        this.$.loanDetailsWho.contactSurname    = contactGivenName;
-        this.$.loanDetailsWho.infoChanged();
+        this.$.loanDetailsWho.setContactName(contactFamilyName);
+        this.$.loanDetailsWho.setContactSurname(contactGivenName);
 
         // Stop propagation.
         return true;
@@ -201,21 +222,13 @@ enyo.kind({
             fromTo      = this.$.loanDetailsFromTo,
             itemImage   = this.$.itemImage;
 
-        what.itemName           = this.loan.item.name;
-        who.contactName         = this.loan.contact.name;
-        who.contactSurname      = this.loan.contact.surname;
-        when.borrowedOn         = this.loan.borrowedOn;
-        when.dueOn              = this.loan.dueOn;
-        fromTo.borrowedFromTo   = this.loan.borrowedFromTo;
-        itemImage.image         = this.loan.item.image;
-
-        what.itemNameChanged();
-        who.infoChanged();
-        when.infoChanged();
-        fromTo.borrowedFromToChanged();
-        itemImage.imageChanged();
-        
-        return true;
+        what.setItemName(this.loan.item.name);
+        who.setContactName(this.loan.contact.name);
+        who.setContactSurname(this.loan.contact.surname);
+        when.setBorrowedOn(this.loan.borrowedOn);
+        when.setDueOn(this.loan.dueOn);
+        fromTo.setBorrowedFromTo(this.loan.borrowedFromTo);
+        itemImage.setImage(this.loan.item.image);
     },
 
     components: [{
@@ -233,23 +246,7 @@ enyo.kind({
                     kind: "onyx.Button",
                     ontap: "takeItemPhoto",
                     components: [
-                        {
-                            tag: "img",
-                            name: "itemImage",
-                            src: litchi.defaults.itemImageUrl,
-                            fit: false,
-                            classes: "loan-details-icon",
-                            published: [
-                                "image"
-                            ],
-                            imageChanged: function () {
-                                if (typeof (this.image) === "undefined") {
-                                    this.setAttribute("src", litchi.defaults.itemImageUrl);
-                                } else {
-                                    this.setAttribute("src", "data:image/jpeg;base64," + this.image);
-                                }
-                            }
-                        }
+                        {kind: "ItemImage"}
                     ]
                 }
             ]},
