@@ -1,3 +1,5 @@
+/* */
+
 /**
  * Header toolbar.
  */
@@ -39,7 +41,6 @@ enyo.kind({
     events: { onContactChosen: "" },
 
     contactsChanged: function (inOldValue) {
-        console.log("contactsChanged");
         this.setCount(this.contacts.length);
         this.refresh();
 

@@ -163,9 +163,18 @@ enyo.kind({
     horizontal: "hidden",
     handlers: { onContactChosen: "contactChosen" },
 
-    contactChosen: function (inSender, inEvent) {
+    contactChosen: function (inSender, contact) {
+        var contactName = contact.name,
+            contactFamilyName = contactName.familyName,
+            contactGivenName    = contactName.givenName;
 
-        this.$.loanDetailsWho.contactName = inEvent.displayName;
+        if ((contactFamilyName === undefined) || (contactGivenName === undefined)) {
+            contactFamilyName   = contactName.formatted.split(" ")[0];
+            contactGivenName    = contactName.formatted.split(" ")[1];
+        }
+
+        this.$.loanDetailsWho.contactName       = contactFamilyName;
+        this.$.loanDetailsWho.contactSurname    = contactGivenName;
         this.$.loanDetailsWho.infoChanged();
 
         return true;
@@ -257,7 +266,6 @@ enyo.kind({
 
     chooseContact: function (inSender, inEvent) {
         this.$.contactListPopup.show();
-        console.log("TODO: Choose contact");
     }
 });
 
