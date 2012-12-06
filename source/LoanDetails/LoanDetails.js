@@ -157,11 +157,21 @@ enyo.kind({
 
 enyo.kind({
     fit: true,
-    name: "LoanDetailsContainer",
-    kind: "Scroller",
-    horizontal: "hidden",
-    handlers: { onContactChosen: "contactChosen" },
+    name        : "LoanDetailsContainer",
+    kind        : "Scroller",
+    horizontal  : "hidden",
 
+    handlers: {
+        onContactChosen : "contactChosen"
+    },
+
+    published: {
+        loan: null
+    },
+    
+    /**
+     * Fill contact fields with chosen contact.
+     */
     contactChosen: function (inSender, contact) {
         var contactName = contact.name,
             contactFamilyName = contactName.familyName,
@@ -176,9 +186,38 @@ enyo.kind({
         this.$.loanDetailsWho.contactSurname    = contactGivenName;
         this.$.loanDetailsWho.infoChanged();
 
-        // stop propagation.
+        // Stop propagation.
         return true;
     },
+
+    /**
+     * Fill loan details.
+     */
+    loanChanged: function (inOldValue) {
+
+        var what        = this.$.loanDetailsWhat,
+            who         = this.$.loanDetailsWho,
+            when        = this.$.loanDetailsWhen,
+            fromTo      = this.$.loanDetailsFromTo,
+            itemImage   = this.$.itemImage;
+
+        what.itemName           = this.loan.item.name;
+        who.contactName         = this.loan.contact.name;
+        who.contactSurname      = this.loan.contact.surname;
+        when.borrowedOn         = this.loan.borrowedOn;
+        when.dueOn              = this.loan.dueOn;
+        fromTo.borrowedFromTo   = this.loan.borrowedFromTo;
+        itemImage.image         = this.loan.item.image;
+
+        what.itemNameChanged();
+        who.infoChanged();
+        when.infoChanged();
+        fromTo.borrowedFromToChanged();
+        itemImage.imageChanged();
+        
+        return true;
+    },
+
     components: [{
         classes: "loan-details-content",
 

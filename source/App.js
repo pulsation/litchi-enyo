@@ -17,6 +17,24 @@ enyo.kind({
             {kind: "ContactListLayout"}*/
         ]
     }],
-    panelChanged : function () { console.log("TODO: transition finished"); }
+
+    handlers: {
+        onLoanChosen: "loanChosen"
+    },
+
+    /**
+     * Slide details panel to the left if the screen is too small
+     * to display both panels.
+     */
+    loanChosen: function (inSender, loan) {
+        if (window.innerWidth < 800) {
+            this.$.mainPanels.next();
+        }
+
+        this.$.loanDetailsLayout.$.loanDetailsContainer.setLoan(loan);
+
+        // Stop propagation.
+        return true;
+    }
 
 });

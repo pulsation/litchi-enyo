@@ -94,6 +94,9 @@ enyo.kind({
         {kind: "LoanListItem"},
         {kind: "Signals", onLoansUpdated: "updateList"}
     ],
+    
+    events: { onLoanChosen: "" },
+
     updateList: function (inSender, inEvent) {
         this.setCount(litchi.loans.getLength());
         this.refresh();
@@ -108,11 +111,13 @@ enyo.kind({
             itemImage   = appPanels.$.loanDetailsLayout.$.loanDetailsContainer.$.itemImage,
             currentLoan = litchi.loans.getList()[inEvent.index];
 
-
+/*
         if (window.innerWidth < 800) {
             appPanels.$.mainPanels.next();
         }
+        */
         litchi.loan.setCurrent(currentLoan);
+        /*
         what.itemName           = currentLoan.item.name;
         who.contactName         = currentLoan.contact.name;
         who.contactSurname      = currentLoan.contact.surname;
@@ -126,6 +131,8 @@ enyo.kind({
         when.infoChanged();
         fromTo.borrowedFromToChanged();
         itemImage.imageChanged();
+*/
+        this.doLoanChosen(currentLoan);
     }
 });
 
