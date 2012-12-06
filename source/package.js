@@ -6,5 +6,6 @@ enyo.depends(
 	"App.js",
 
     "LoanList",
-    "LoanDetails"
+    "LoanDetails",
+    "ContactList"
 );

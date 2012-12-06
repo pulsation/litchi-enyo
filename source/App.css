@@ -12,7 +12,9 @@
     height: 56px;
 }
 
-.loan-details-layout, .loan-list-layout {
+.loan-details-layout, 
+.loan-list-layout, 
+.contact-list-layout {
 	background-color: #eeeeee; 
     border-left: 1px solid #aaaaaa;
 }

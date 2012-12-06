@@ -1,3 +1,5 @@
+/* global Camera, ContactFindOptions, litchi */
+
 enyo.kind({
     name: "LoanDetailsHeaderToolbar",
     kind: onyx.Toolbar,
@@ -94,6 +96,7 @@ enyo.kind({
 enyo.kind({
     name: "LoanDetailsWhen",
     kind: "onyx.Groupbox",
+
     components: [
         {kind: "onyx.GroupboxHeader", content: "When"},
         {content: "Borrowed on"},
@@ -157,8 +160,29 @@ enyo.kind({
     name: "LoanDetailsContainer",
     kind: "Scroller",
     horizontal: "hidden",
+    handlers: { onContactChosen: "contactChosen" },
+
+    contactChosen: function (inSender, contact) {
+        var contactName = contact.name,
+            contactFamilyName = contactName.familyName,
+            contactGivenName    = contactName.givenName;
+
+        if ((contactFamilyName === undefined) || (contactGivenName === undefined)) {
+            contactFamilyName   = contactName.formatted.split(" ")[0];
+            contactGivenName    = contactName.formatted.split(" ")[1];
+        }
+
+        this.$.loanDetailsWho.contactName       = contactFamilyName;
+        this.$.loanDetailsWho.contactSurname    = contactGivenName;
+        this.$.loanDetailsWho.infoChanged();
+
+        // stop propagation.
+        return true;
+    },
     components: [{
         classes: "loan-details-content",
+
+
         components: [
             {kind: "FittableColumns", components: [
                 {fit: true, components: [
@@ -191,7 +215,7 @@ enyo.kind({
                 }
             ]},
             {tag: "br"},
-            {kind: "FittableColumns", components: [
+            {kind: "FittableColumns", name: "toto", components: [
                 {fit: true, components: [
                     {kind: "LoanDetailsWho"}
                 ]},
@@ -207,6 +231,10 @@ enyo.kind({
                             classes: "loan-details-icon"
                         }
                     ]
+                },
+                {
+                    kind: "ContactListPopup",
+                    name: "contactListPopup"
                 }
             ]},
             {tag: "br"},
@@ -234,27 +262,10 @@ enyo.kind({
                 destinationType: Camera.DestinationType.DATA_URL
             }
         );
-        console.log("TODO: Take item photo");
     },
 
     chooseContact: function (inSender, inEvent) {
-        var options = new ContactFindOptions(),
-            fields = ["displayName", "name", "photos"];
-
-        options.filter = "";
-        navigator.contacts.find(
-            fields,
-            function (contacts) {
-                console.log("TODO: success retrieving contacts");
-                console.log(contacts);
-            },
-            function (error) {
-                console.log("TOODO: error retrieving contacts");
-            },
-            options
-        );
-        
-        console.log("TODO: Choose contact");
+        this.$.contactListPopup.show();
     }
 });
 

@@ -100,7 +100,7 @@ enyo.kind({
     },
     loanTaped: function (inSender, inEvent) {
         // FIXME: calling container.container looks pretty ugly.
-        var appPanels = this.container.container,
+        var appPanels = this.container.container.container,
             what        = appPanels.$.loanDetailsLayout.$.loanDetailsContainer.$.loanDetailsWhat,
             who         = appPanels.$.loanDetailsLayout.$.loanDetailsContainer.$.loanDetailsWho,
             when        = appPanels.$.loanDetailsLayout.$.loanDetailsContainer.$.loanDetailsWhen,
@@ -108,8 +108,9 @@ enyo.kind({
             itemImage   = appPanels.$.loanDetailsLayout.$.loanDetailsContainer.$.itemImage,
             currentLoan = litchi.loans.getList()[inEvent.index];
 
+
         if (window.innerWidth < 800) {
-            appPanels.next();
+            appPanels.$.mainPanels.next();
         }
         litchi.loan.setCurrent(currentLoan);
         what.itemName           = currentLoan.item.name;
