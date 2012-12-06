@@ -178,6 +178,17 @@ enyo.kind({
 });
 
 enyo.kind({
+    kind: "onyx.Popup",
+    name: "SpinnerPopup",
+    floating: true,
+    centered: true,
+    modal: true,
+    components: [
+        {kind: "onyx.Spinner"}
+    ]
+});
+
+enyo.kind({
     fit: true,
     name        : "LoanDetailsContainer",
     kind        : "Scroller",
@@ -271,7 +282,11 @@ enyo.kind({
                 {
                     kind: "ContactListPopup",
                     name: "contactListPopup"
+                },
+                {
+                    kind: "SpinnerPopup"
                 }
+
             ]},
             {tag: "br"},
             {kind: "LoanDetailsWhen"}
@@ -279,7 +294,10 @@ enyo.kind({
     }],
 
     takeItemPhoto: function (inSender, inEvent) {
-        var itemImageCtrl = this.$.itemImage;
+        var itemImageCtrl = this.$.itemImage,
+            that = this;
+
+        this.$.spinnerPopup.show();
 
         navigator.camera.getPicture(
             // Success
@@ -287,10 +305,12 @@ enyo.kind({
                 itemImageCtrl.image = imageData;
                 itemImageCtrl.imageChanged();
                 litchi.loan.getCurrent().item.image = imageData;
+                that.$.spinnerPopup.hide();
             },
             // Failure
             function (message) {
                 console.log("TODO: alert user if taking photo failed.");
+                that.$.spinnerPopup.hide();
             },
             // Options
             {
