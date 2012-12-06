@@ -1,4 +1,4 @@
-/* global Camera, ContactFindOptions, litchi */
+/* global Camera, litchi */
 
 enyo.kind({
     name: "LoanDetailsHeaderToolbar",

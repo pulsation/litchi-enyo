@@ -1,4 +1,4 @@
-/* */
+/* global ContactFindOptions */
 
 /**
  * Header toolbar.
