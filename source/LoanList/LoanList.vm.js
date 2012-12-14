@@ -1,6 +1,6 @@
 var litchi = litchi ||   {};
 
-litchi.loans = (function() {
+litchi.loans = (function () {
 
     var _all = litchi.sampleList,
         _currentList = _all,
@@ -17,7 +17,9 @@ litchi.loans = (function() {
                     return (element.borrowedFromTo === fromTo);
                 };
             return _all.filter(_filterBorrowedFromTo);
-        };
+        },
+
+        _store = new Lawnchair({name: 'loans'}, function() {});
 
 
     return {
@@ -67,6 +69,16 @@ litchi.loans = (function() {
 
         publishMessage: function (message) {
             enyo.Signals.send("onLoansUpdated");
+        },
+        save: function () {
+            _store.save({key: 'loans', data: _all});
+        },
+        load: function () {
+            _store.get('loans', function (loans) {_all = loans.data;});
         }
     };
 }());
+
+// test
+litchi.loans.save();
+litchi.loans.load();
