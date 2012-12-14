@@ -17,10 +17,9 @@ litchi.loans = (function () {
                     return (element.borrowedFromTo === fromTo);
                 };
             return _all.filter(_filterBorrowedFromTo);
-        };//,
-
-        //_store = new Lawnchair({name: 'loans'}, function() {});
-
+        },
+        
+        _dataStore = new Lawnchair({adapter: 'dom'}, function () {});
 
     return {
         /**
@@ -71,10 +70,10 @@ litchi.loans = (function () {
             enyo.Signals.send("onLoansUpdated");
         },
         save: function () {
-            Lawnchair(function () { this.save({key: 'loans', data: _all}); });
+            _dataStore.save({key: 'loans', data: _all});
         },
         load: function () {
-            Lawnchair(function () { this.get('loans', function (loans) {_all = loans.data; }); });
+            _dataStore.get('loans', function (loans) {_all = loans.data; });
         }
     };
 }());
