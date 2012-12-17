@@ -8,8 +8,15 @@ litchi.loan = (function () {
         getCurrent: function () {
             return _currentLoan;
         },
-        setCurrent: function (currLoan) {
-            _currentLoan = currLoan;
+        setCurrent: function (currLoan, index) {
+            _currentLoan        = currLoan;
+            _currentLoan.index  = index;
+        },
+        save: function () {
+            if (typeof _currentLoan.index !== undefined) {
+                litchi.loans[_currentLoan.index] = _currentLoan;
+                litchi.loans.save();
+            }
         }
     };
 }());

@@ -106,8 +106,8 @@ enyo.kind({
     loanTaped: function (inSender, inEvent) {
         // FIXME: calling container.container looks pretty ugly.
         var currentLoan = litchi.loans.getList()[inEvent.index];
-
-        litchi.loan.setCurrent(currentLoan);
+        
+        litchi.loan.setCurrent(currentLoan, inEvent.index);
         this.doLoanChosen(currentLoan);
     }
 });
